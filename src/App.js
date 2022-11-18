@@ -1,24 +1,22 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Contact from './components/Contact';
-import Visit from './components/Visit';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Menu from './pages/Menu';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <div className="page">
-        <Hero />
-        <About />
-        <div className="bg">
-          <img src={process.env.PUBLIC_URL + 'Images/img4.jpg'} alt="" />
-          <Contact />
-          <Visit />
+    <BrowserRouter>
+      <div className="App">
+        <div className="page">
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/menu' element={<Menu />}/>
+          </Routes>
         </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
