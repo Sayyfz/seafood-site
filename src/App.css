@@ -1,3 +1,6 @@
+.page {
+  position: relative;
+}
 .section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50%, 2fr));
@@ -46,6 +49,11 @@
   bottom: 0;
   z-index: -100;
   object-fit: cover;
+}
+.circle-border {
+  padding: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--clr-accent);
 }
 
 
