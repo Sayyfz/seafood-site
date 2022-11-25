@@ -6,15 +6,23 @@ import MenuCategory from "../components/MenuCategory";
 import Edit from "../components/Edit";
 import FancyOpenModal from "../components/FancyOpenModal";
 import AddMenuCategoryModal from "../components/AddMenuCategoryModal";
+import { deleteCategoryById, getAllItems } from "../api/MenuApi";
 
 const Menu = () => {
 
-    const [menuItems, setMenuItems] = useState([]);
+    const [categories, setMenuItems] = useState([]);
     const menuPage = useRef(null);
 
     const onEditClicked = () => {
         menuPage.current.classList.toggle('edit-mode');
     };
+
+    const removeCategory = async (id) => {
+        const newCats = categories.filter(cat => cat._id != id);
+        setMenuItems(newCats);
+
+        await deleteCategoryById(id);
+    }
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/menu')
@@ -29,7 +37,7 @@ const Menu = () => {
             <div ref={menuPage}>
                 <div  className="menu-page mx-auto p-sm-5 px-4 py-5">
                     {
-                        menuItems.map(menuItem => <MenuCategory category={menuItem} key={menuItem._id}/>)
+                        categories.map(category => <MenuCategory removeCategory={removeCategory} category={category} key={category._id}/>)
                     }
                 </div>
                 <div className="add-category">

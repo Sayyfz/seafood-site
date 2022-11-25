@@ -36,6 +36,21 @@ export const deleteMenuItemById = async (req, res) => {
         .then(() =>  res.json(item));
 };
 
+export const deleteCategoryById = async (req, res) => {
+    const { id } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return  res.status(404).json({ message: 'id is not valid' });
+    };
+
+    const category = await Category.findByIdAndDelete({ "_id": id });
+
+    if(!category)
+        return res.status(404).json({ msg: 'Category not found' });
+        
+    return res.status(200).json(category);
+};
+
 export const editMenuItemById = async (req, res) => {
     const { id } = req.params;
 

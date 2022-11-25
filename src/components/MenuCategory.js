@@ -1,29 +1,38 @@
+import { useEffect, useState } from "react";
+import { deleteItemById } from "../api/MenuApi.js";
 import AddMenuItemModal from "./AddMenuItemModal";
 import FancyOpenModal from "./FancyOpenModal";
+import MenuItem from "./MenuItem";
+import Remove from "./Remove.js";
 
  
-const MenuCategory = ({ category }) => {
+const MenuCategory = ({ category, removeCategory }) => {
 
-    const removeMenuItem = () => {
-        console.log('remove');
+    const [catItems, setCatItems] = useState([]);
+
+    const removeMenuItem = async (id) => {
+        const newItems = catItems.filter(item => item._id !== id);
+        setCatItems(newItems);
+        
+        await deleteItemById(id);
     };
+
+    useEffect(() => {
+        if(category.content)
+            setCatItems(category.content);
+    }, [])
 
     return (
          <div className="menu-category d-flex flex-column align-items-center text-center my-4">
-            <h2 className="menu-category__title mb-5">{ category.title }</h2>
+            <div className="d-flex align-items-center mb-5">
+                <Remove callback={removeCategory} item={category}/>
+                <h2 className="menu-category__title mb-0 px-3">{ category.title }</h2>
+            </div>
             <ul className="menu-category__list d-flex flex-column">
                 {
-                    category.content.map(item => {
+                    catItems && catItems.map(item => {
                         return (
-                            <li key={item._id} className="menu-category__item d-flex justify-content-between">
-                                <i onClick={removeMenuItem} className="fa-solid fa-circle-xmark remove-icon fa-md"></i>
-                                <span className="menu-category__item-price">
-                                    {item.price ? item.price : ''}
-                                </span>
-                                <p className="menu-category__item-name">
-                                    {item.name ? item.name : ''}
-                                </p>
-                            </li>
+                            <MenuItem item={item} removeMenuItem={removeMenuItem} key={item._id}/>
                         )
                     })
                 }
