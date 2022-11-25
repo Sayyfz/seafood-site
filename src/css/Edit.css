@@ -1,0 +1,21 @@
+
+
+.edit {
+    position: fixed;
+    right: 35px;
+    bottom: 35px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+.edit:hover {
+    background-color: var(--clr-accent);
+}
+
+.edit.circle-border i {
+    color: var(--clr-accent);
+    transition: 0.4s ease;
+}
+
+.edit.circle-border:hover i{
+    color: white;
+}

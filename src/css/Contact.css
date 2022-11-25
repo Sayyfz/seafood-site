@@ -1,0 +1,44 @@
+:root {
+    --social-icon-width: 45px;
+}
+
+.social-list {
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-item {
+    
+    width: var(--social-icon-width);
+    height: var(--social-icon-width);
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    transition: all 0.4s ease;
+}
+
+.social-item:hover {
+    background-color: var(--clr-accent);
+}
+
+.social-item i {
+    color: var(--clr-accent);
+    transition: 0.4s ease;
+}
+
+.social-item:hover i {
+    color: white;
+}
+
+.social-link {
+    position: absolute;
+    right: -2px;
+    width: var(--social-icon-width) ;
+    height: var(--social-icon-width);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+
