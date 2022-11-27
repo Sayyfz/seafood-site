@@ -1,6 +1,22 @@
+import { useState } from 'react';
 import '../css/AddItemModal.css';
 
-const AddMenuItemModal = () => {
+const AddMenuItemModal = ({ createItemOnClick }) => {
+
+    const [mealName, setMealName] = useState('');
+    const [price, setPrice] = useState(0);
+
+    const onSubmitItem = (e) => {
+        e.preventDefault();
+
+        const newItem = {
+            name: mealName,
+            price,
+        };
+
+        createItemOnClick(newItem);
+    }
+
     return ( 
     <>
         <div className="modal fade" id="itemModal" tabIndex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
@@ -13,20 +29,20 @@ const AddMenuItemModal = () => {
                 </button>
             </div>
             <div className="modal-body">
-                <form>
-                <div className="form-group">
-                    <label htmlFor="recipient-name" className="col-form-label">اسم الوجبة</label>
-                    <input type="text" className="form-control" id="recipient-name" dir="rtl"/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="message-text" className="col-form-label">السعر</label>
-                    <input type="number" className="form-control" id="recipient-name" dir="rtl"/>
-                </div>
+                <form onSubmit={(e) => onSubmitItem(e)}>
+                    <div className="form-group">
+                        <label htmlFor="recipient-name" className="col-form-label">اسم الوجبة</label>
+                        <input value={mealName} type="text" className="form-control" id="recipient-name" dir="rtl" onChange={(e) => setMealName(e.target.value)}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message-text" className="col-form-label">السعر</label>
+                        <input value={price} type="number" className="form-control" id="recipient-name" dir="rtl" onChange={(e) => setPrice(e.target.value)}/>
+                    </div>
+                    <div className="modal-footer mt-4">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">أغلق</button>
+                        <input type="submit" className="btn btn-primary" value='أضف الوجبة'/>
+                    </div>
                 </form>
-            </div>
-            <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Send message</button>
             </div>
             </div>
         </div>

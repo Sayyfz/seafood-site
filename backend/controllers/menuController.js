@@ -8,13 +8,31 @@ export const getMenuItems = async (req, res) => {
 };
 
 export const createMenuCategory = async (req, res) => {
-    console.log(req.body);
     try {
         const category = await Category.create(req.body);
         res.status(200).json(category);
     } catch(error) {
         res.status(400).json({ error: error.message });
     };
+};
+
+export const createMenuItem = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Id is not valid' });
+    };
+
+    const category = await Category.findOne({ "_id": id });
+
+    if(!category)
+        return res.status(404).json({ msg: 'Category not found' });
+
+    category.content.push(req.body);
+
+    category.save()
+        .then(() => res.json(req.body))
+        .catch(err => res.status(404).json({ err }));
 };
 
 export const deleteMenuItemById = async (req, res) => {

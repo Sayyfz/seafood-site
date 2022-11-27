@@ -6,15 +6,23 @@ import MenuCategory from "../components/MenuCategory";
 import Edit from "../components/Edit";
 import FancyOpenModal from "../components/FancyOpenModal";
 import AddMenuCategoryModal from "../components/AddMenuCategoryModal";
-import { deleteCategoryById, getAllItems } from "../api/MenuApi";
+import { createNewCategory, deleteCategoryById, getAllItems } from "../api/MenuApi";
 
 const Menu = () => {
 
     const [categories, setMenuItems] = useState([]);
     const menuPage = useRef(null);
 
+    
+
     const onEditClicked = () => {
         menuPage.current.classList.toggle('edit-mode');
+    };
+
+    const createCategory = async (newCategory) => {
+        setMenuItems([...categories, newCategory]);
+
+        await createNewCategory(newCategory);
     };
 
     const removeCategory = async (id) => {
@@ -42,7 +50,7 @@ const Menu = () => {
                 </div>
                 <div className="add-category">
                     <FancyOpenModal text='أضف قائمة' target='#categoryModal'/>
-                    <AddMenuCategoryModal />
+                    <AddMenuCategoryModal createCategoryOnClick={createCategory}/>
                 </div>
             </div>
             <Edit edit={onEditClicked}/>

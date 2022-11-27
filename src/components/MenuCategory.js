@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteItemById } from "../api/MenuApi.js";
+import { createCategoryItem, deleteItemById } from "../api/MenuApi.js";
 import AddMenuItemModal from "./AddMenuItemModal";
 import FancyOpenModal from "./FancyOpenModal";
 import MenuItem from "./MenuItem";
@@ -9,6 +9,12 @@ import Remove from "./Remove.js";
 const MenuCategory = ({ category, removeCategory }) => {
 
     const [catItems, setCatItems] = useState([]);
+
+    const createItem = async(item) => {
+        setCatItems([...catItems, item]);
+
+        await createCategoryItem(category._id, item);
+    }
 
     const removeMenuItem = async (id) => {
         const newItems = catItems.filter(item => item._id !== id);
@@ -20,7 +26,7 @@ const MenuCategory = ({ category, removeCategory }) => {
     useEffect(() => {
         if(category.content)
             setCatItems(category.content);
-    }, [])
+    }, [category.content])
 
     return (
          <div className="menu-category d-flex flex-column align-items-center text-center my-4">
@@ -39,7 +45,7 @@ const MenuCategory = ({ category, removeCategory }) => {
             </ul>
             <span className="add-item">
                 <FancyOpenModal text={'أضف وجبة'} target='#itemModal' />
-                <AddMenuItemModal />
+                <AddMenuItemModal createItemOnClick={createItem}/>
             </span>
          </div>
             

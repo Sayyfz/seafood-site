@@ -1,6 +1,22 @@
+import { useState } from "react";
 
 
-const AddMenuCategoryModal = () => {
+const AddMenuCategoryModal = ({ createCategoryOnClick }) => {
+
+    const [catName, setCatName] = useState('');
+
+    const onSubmitCategory = (e) => {
+        e.preventDefault();
+
+        const newCategory = {
+            title: catName,
+            content: [],
+        };
+
+        createCategoryOnClick(newCategory);
+
+    };
+
     return (  
         <div className="modal fade" id="categoryModal" tabIndex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
@@ -12,18 +28,19 @@ const AddMenuCategoryModal = () => {
                 </button>
             </div>
             <div className="modal-body">
-                <form>
+                <form onSubmit={(e) => onSubmitCategory(e)}>
                 <div className="form-group">
                     <label htmlFor="recipient-name" className="col-form-label">اسم القائمة</label>
-                    <input type="text" className="form-control" id="recipient-name" dir="rtl"/>
+                    <input value={catName} type="text" className="form-control" id="recipient-name" dir="rtl" onChange={(e) => setCatName(e.target.value)}/>
+                    <div className="modal-footer mt-4">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">أغلق</button>
+                        <input type="submit" className="btn btn-primary" value='أضف القائمة'/>
+                    </div>
                 </div>
                 
                 </form>
             </div>
-            <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Send message</button>
-            </div>
+            
             </div>
         </div>
         </div>
