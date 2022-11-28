@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../css/AddItemModal.css';
 
-const AddMenuItemModal = ({ createItemOnClick }) => {
+const AddMenuItemModal = ({ createItemOnClick, idx }) => {
 
     const [mealName, setMealName] = useState('');
     const [price, setPrice] = useState(0);
@@ -15,11 +15,11 @@ const AddMenuItemModal = ({ createItemOnClick }) => {
         };
 
         createItemOnClick(newItem);
-    }
+    };
 
     return ( 
     <>
-        <div className="modal fade" id="itemModal" tabIndex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+        <div className="modal fade" id={"itemModal" + idx} tabIndex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
             <div className="modal-content">
             <div className="modal-header">
@@ -40,7 +40,7 @@ const AddMenuItemModal = ({ createItemOnClick }) => {
                     </div>
                     <div className="modal-footer mt-4">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">أغلق</button>
-                        <input type="submit" className="btn btn-primary" value='أضف الوجبة'/>
+                        <input type="submit" className="btn btn-primary" data-bs-dismiss="modal" value='أضف الوجبة'/>
                     </div>
                 </form>
             </div>

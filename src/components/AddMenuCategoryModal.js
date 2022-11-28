@@ -34,7 +34,7 @@ const AddMenuCategoryModal = ({ createCategoryOnClick }) => {
                     <input value={catName} type="text" className="form-control" id="recipient-name" dir="rtl" onChange={(e) => setCatName(e.target.value)}/>
                     <div className="modal-footer mt-4">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">أغلق</button>
-                        <input type="submit" className="btn btn-primary" value='أضف القائمة'/>
+                        <input type="submit" className="btn btn-primary" data-bs-dismiss="modal" value='أضف القائمة'/>
                     </div>
                 </div>
                 

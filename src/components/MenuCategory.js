@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createCategoryItem, deleteItemById } from "../api/MenuApi.js";
+import { createCategoryItem, deleteItemById, editItemById } from "../api/MenuApi.js";
 import AddMenuItemModal from "./AddMenuItemModal";
 import FancyOpenModal from "./FancyOpenModal";
 import MenuItem from "./MenuItem";
@@ -12,7 +12,6 @@ const MenuCategory = ({ category, removeCategory }) => {
 
     const createItem = async(item) => {
         setCatItems([...catItems, item]);
-
         await createCategoryItem(category._id, item);
     }
 
@@ -22,6 +21,11 @@ const MenuCategory = ({ category, removeCategory }) => {
         
         await deleteItemById(id);
     };
+
+    const editMenuItem = async (id, newItem) => {
+
+        await editItemById(id, newItem);
+    }
 
     useEffect(() => {
         if(category.content)
@@ -44,8 +48,8 @@ const MenuCategory = ({ category, removeCategory }) => {
                 }
             </ul>
             <span className="add-item">
-                <FancyOpenModal text={'أضف وجبة'} target='#itemModal' />
-                <AddMenuItemModal createItemOnClick={createItem}/>
+                <FancyOpenModal text={'أضف وجبة'} target={'#itemModal' + category._id} />
+                <AddMenuItemModal createItemOnClick={createItem} idx={category._id}/>
             </span>
          </div>
             
