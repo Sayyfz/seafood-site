@@ -18,7 +18,16 @@
     color: var(--clr-accent);
 }
 
+.category-header {
+    width: 100%;
+}
+.category-header i {
+    color: white;
+    opacity: 0.4;
+}
+
 .menu-category__title {
+    width: 100%;
     font-weight: bold;
     font-size: var(--fs-sm);
     text-align: center;
@@ -106,11 +115,24 @@
 }
 
 
+.edit-mode .edit-category:hover i {
+
+}
+
+
 .col-form-label {
     width: 100%;
     text-align: end;
 }
+.modal {
+    color: black;
+    font-weight: 400!important;
+}
 
+.modal-title {
+    width: 100%;
+    text-align: right;
+}
 
 @media (min-width: 850px) {
     .menu-page {

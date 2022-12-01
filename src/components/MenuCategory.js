@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
-import { createCategoryItem, deleteItemById, editItemById } from "../api/MenuApi.js";
-import AddMenuItemModal from "./AddMenuItemModal";
+import { createCategoryItem, deleteItemById, editCategoryById } from "../api/MenuApi.js";
 import FancyOpenModal from "./FancyOpenModal";
 import MenuItem from "./MenuItem";
 import Remove from "./Remove.js";
+import MenuItemModal from "./MenuItemModal";
+import MenuCategoryModal from "./MenuCategoryModal.js";
 
  
 const MenuCategory = ({ category, removeCategory }) => {
 
     const [catItems, setCatItems] = useState([]);
+    const [catTitle, setCatTitle] = useState('');
 
     const createItem = async(item) => {
         setCatItems([...catItems, item]);
         await createCategoryItem(category._id, item);
+    };
+
+    const editCategory = async (catTitle) => {
+
+        const newCategory = {
+            title: catTitle,
+            content: category.content,
+        };
+
+        setCatTitle(catTitle);
+        await editCategoryById(category._id, newCategory);
     }
 
     const removeMenuItem = async (id) => {
@@ -22,21 +35,23 @@ const MenuCategory = ({ category, removeCategory }) => {
         await deleteItemById(id);
     };
 
-    const editMenuItem = async (id, newItem) => {
-
-        await editItemById(id, newItem);
-    }
-
     useEffect(() => {
         if(category.content)
             setCatItems(category.content);
+        
+        setCatTitle(category.title);
     }, [category.content])
 
     return (
          <div className="menu-category d-flex flex-column align-items-center text-center my-4">
-            <div className="d-flex align-items-center mb-5">
+            <div className="category-header d-flex align-items-center mb-5 justify-content-between">
                 <Remove callback={removeCategory} item={category}/>
-                <h2 className="menu-category__title mb-0 px-3">{ category.title }</h2>
+                <h2 className="menu-category__title mb-0 px-3">{ catTitle }</h2>
+
+                <div data-bs-toggle="modal" data-bs-target={`#editCategoryModal${category._id}`} className="edit-item">
+                    <i className="fa-solid fa-pen-to-square fa-sm"></i>
+                </div>
+                <MenuCategoryModal onSubmitCategoryClicked={editCategory} edit={ true } idx={category._id} />
             </div>
             <ul className="menu-category__list d-flex flex-column">
                 {
@@ -49,7 +64,7 @@ const MenuCategory = ({ category, removeCategory }) => {
             </ul>
             <span className="add-item">
                 <FancyOpenModal text={'أضف وجبة'} target={'#itemModal' + category._id} />
-                <AddMenuItemModal createItemOnClick={createItem} idx={category._id}/>
+                <MenuItemModal onSubmitClicked={createItem} idx={category._id} edit={false} />
             </span>
          </div>
             

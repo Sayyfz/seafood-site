@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import MenuCategory from "../components/MenuCategory";
 import Edit from "../components/Edit";
 import FancyOpenModal from "../components/FancyOpenModal";
-import AddMenuCategoryModal from "../components/AddMenuCategoryModal";
-import { createNewCategory, deleteCategoryById, getAllItems } from "../api/MenuApi";
+import { createNewCategory, deleteCategoryById, editCategoryById, getAllItems } from "../api/MenuApi";
+import MenuCategoryModal from "../components/MenuCategoryModal";
 
 const Menu = () => {
 
@@ -19,11 +19,18 @@ const Menu = () => {
         menuPage.current.classList.toggle('edit-mode');
     };
 
-    const createCategory = async (newCategory) => {
+    const createCategory = async (catTitle) => {
+        const newCategory = {
+            title: catTitle,
+            content: []
+        };
+        
         setMenuItems([...categories, newCategory]);
 
         await createNewCategory(newCategory);
     };
+
+    
 
     const removeCategory = async (id) => {
         const newCats = categories.filter(cat => cat._id != id);
@@ -50,7 +57,7 @@ const Menu = () => {
                 </div>
                 <div className="add-category">
                     <FancyOpenModal text='أضف قائمة' target='#categoryModal'/>
-                    <AddMenuCategoryModal createCategoryOnClick={createCategory}/>
+                    <MenuCategoryModal onSubmitCategoryClicked={createCategory} edit={ false } idx=''/>
                 </div>
             </div>
             <Edit edit={onEditClicked}/>
