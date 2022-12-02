@@ -50,7 +50,7 @@ const Menu = () => {
         <>
             <Navbar />
             <div ref={menuPage}>
-                <div  className="menu-page mx-auto p-sm-5 px-4 py-5">
+                <div  className={categories.length > 0 ? `menu-page mx-auto p-sm-5 px-4 py-5` : 'menu-page mx-auto'}>
                     {
                         categories.map(category => <MenuCategory removeCategory={removeCategory} category={category} key={category._id}/>)
                     }
