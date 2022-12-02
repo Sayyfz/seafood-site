@@ -34,11 +34,11 @@ const Menu = () => {
     
 
     const removeCategory = async (id) => {
+        await deleteCategoryById(id);
         const newCats = categories.filter(cat => cat._id !== id);
         setMenuItems(newCats);
 
-        await deleteCategoryById(id);
-    }
+    };
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/menu')

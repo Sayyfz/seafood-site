@@ -49,7 +49,7 @@ export const deleteMenuItemById = async (req, res) => {
     category.content = category.content.filter(i => i != item);
 
     category.save()
-        .then(() =>  res.json(item))
+        .then(() =>  res.json(category.content))
         .catch((err) => res.json(err));
 };
 
@@ -75,16 +75,20 @@ export const editMenuItemById = async (req, res) => {
         return res.status(404).json({ message: 'id is not valid' });
     };
 
+    console.log(`ID to search for is:    ${id}`);
+    const foundCats = await Category.find({});
+    foundCats.map(cat => cat.content.map(item => console.log(`Item id in database:      ${item._id}`)));
     const category = await Category.findOne({"content._id": id});
-
-    if(!category)
-        return res.status(404).json({ err: 'Item not found' });
+    
+    if(!category) {
+        return res.status(404).json({ err: 'Category not found' });
+    };
 
     const itemIndex = category.content.findIndex(x => x.id == id);
     category.content[itemIndex] = req.body;
     
     category.save()
-        .then((item) => {
+        .then(() => {
             res.status(200).json(category.content[itemIndex]);
         }).catch(err => res.status(404).json({ err }));
 };
@@ -101,5 +105,5 @@ export const editCategoryById = async (req, res) => {
     if(!category)
         return res.status(404).json({ err: 'Category not found' });
 
-    return res.status(200).json(req.body);
+    return res.status(200).json(category);
 };

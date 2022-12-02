@@ -39,7 +39,7 @@ const MenuCategory = ({ category, removeCategory }) => {
     useEffect(() => {
         if(category.content)
             setCatItems(category.content);
-        
+
         setCatTitle(category.title);
     }, [category.content])
 

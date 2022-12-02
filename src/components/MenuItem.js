@@ -9,12 +9,9 @@ const MenuItem = ({ item, removeMenuItem }) => {
     const [currentItem, setCurrentItem] = useState({})
 
     const editItemOnClick = async (newItem) => {
-        const res = await editItemById(item._id, newItem);
-
-        if(res.ok) {
-        }
-        
-        setCurrentItem(newItem)
+        const res = await editItemById(currentItem._id, newItem);
+        console.log(`Item saved with the following ID:    ${res.data._id}`)
+        setCurrentItem(res.data);
     };
 
     useEffect(() => {
