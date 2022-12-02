@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import MenuCategory from "../components/MenuCategory";
 import Edit from "../components/Edit";
 import FancyOpenModal from "../components/FancyOpenModal";
-import { createNewCategory, deleteCategoryById, editCategoryById, getAllItems } from "../api/MenuApi";
+import { createNewCategory, deleteCategoryById, getAllItems } from "../api/MenuApi";
 import MenuCategoryModal from "../components/MenuCategoryModal";
 
 const Menu = () => {
@@ -24,16 +24,17 @@ const Menu = () => {
             title: catTitle,
             content: []
         };
-        
-        setMenuItems([...categories, newCategory]);
 
-        await createNewCategory(newCategory);
+        const res = await createNewCategory(newCategory);
+        
+        setMenuItems([...categories, res.data]);
+
     };
 
     
 
     const removeCategory = async (id) => {
-        const newCats = categories.filter(cat => cat._id != id);
+        const newCats = categories.filter(cat => cat._id !== id);
         setMenuItems(newCats);
 
         await deleteCategoryById(id);

@@ -9,9 +9,12 @@ const MenuItem = ({ item, removeMenuItem }) => {
     const [currentItem, setCurrentItem] = useState({})
 
     const editItemOnClick = async (newItem) => {
-        setCurrentItem(newItem)
+        const res = await editItemById(item._id, newItem);
 
-        await editItemById(item._id, newItem);
+        if(res.ok) {
+        }
+        
+        setCurrentItem(newItem)
     };
 
     useEffect(() => {

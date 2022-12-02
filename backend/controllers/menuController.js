@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { ObjectId } from 'mongodb'
 import Category from "../models/CategoryModel.js";
 
 export const getMenuItems = async (req, res) => {
@@ -17,7 +16,7 @@ export const createMenuCategory = async (req, res) => {
 };
 
 export const createMenuItem = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Id is not valid' });
@@ -29,10 +28,9 @@ export const createMenuItem = async (req, res) => {
         return res.status(404).json({ msg: 'Category not found' });
 
     category.content.push(req.body);
-
     category.save()
-        .then(() => res.json(req.body))
-        .catch(err => res.status(404).json({ err }));
+        .then(() => res.json(category.content[category.content.length - 1]))
+        .catch(err => res.status(404).json({ err: 'error saving category' }));
 };
 
 export const deleteMenuItemById = async (req, res) => {
@@ -81,8 +79,6 @@ export const editMenuItemById = async (req, res) => {
 
     if(!category)
         return res.status(404).json({ err: 'Item not found' });
-
-    // let item = category.content.id(id);
 
     const itemIndex = category.content.findIndex(x => x.id == id);
     category.content[itemIndex] = req.body;

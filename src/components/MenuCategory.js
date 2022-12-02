@@ -13,8 +13,9 @@ const MenuCategory = ({ category, removeCategory }) => {
     const [catTitle, setCatTitle] = useState('');
 
     const createItem = async(item) => {
-        setCatItems([...catItems, item]);
-        await createCategoryItem(category._id, item);
+        const res = await createCategoryItem(category._id, item);
+        
+        setCatItems([...catItems, res.data]);
     };
 
     const editCategory = async (catTitle) => {
