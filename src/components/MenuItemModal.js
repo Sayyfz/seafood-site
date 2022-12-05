@@ -6,6 +6,9 @@ const MenuItemModal = ({ onSubmitClicked, idx, edit }) => {
     const [mealName, setMealName] = useState('');
     const [price, setPrice] = useState(0);
 
+    // const [error, setError] = useState(null);
+    // const [emptyFields, setEmptyFields] = useState([]);
+
     const onSubmitItem = (e) => {
         e.preventDefault();
 
@@ -44,6 +47,7 @@ const MenuItemModal = ({ onSubmitClicked, idx, edit }) => {
                     </div>
                 </form>
             </div>
+         
             </div>
         </div>
         </div>

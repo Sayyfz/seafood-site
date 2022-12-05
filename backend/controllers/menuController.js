@@ -7,15 +7,39 @@ export const getMenuItems = async (req, res) => {
 };
 
 export const createMenuCategory = async (req, res) => {
+    let emptyFields = [];
+
+    if(!req.body.title) {
+        emptyFields.push('اسم القائمة');
+    };
+
+    if(emptyFields.length > 0) {
+        res.status(400).json({ error: 'من فضلك أدخل البيانات المطلوبة' , emptyFields})
+    };
+
     try {
         const category = await Category.create(req.body);
-        res.status(200).json(category);
+        return res.status(200).json(category);
     } catch(error) {
         res.status(400).json({ error: error.message });
     };
 };
 
 export const createMenuItem = async (req, res) => {
+    
+    let emptyFields = [];
+
+    if(!req.body.name) {
+        emptyFields.push('اسم الوجبة');
+    };
+    if(!req.body.price) {
+        emptyFields.push('السعر');
+    };
+
+    if(emptyFields.length > 0) {
+        res.status(400).json({ error: 'من فضلك أدخل البيانات المطلوبة' , emptyFields})
+    };
+
     const { id } = req.params;
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
@@ -75,9 +99,6 @@ export const editMenuItemById = async (req, res) => {
         return res.status(404).json({ message: 'id is not valid' });
     };
 
-    console.log(`ID to search for is:    ${id}`);
-    const foundCats = await Category.find({});
-    foundCats.map(cat => cat.content.map(item => console.log(`Item id in database:      ${item._id}`)));
     const category = await Category.findOne({"content._id": id});
     
     if(!category) {
@@ -99,8 +120,7 @@ export const editCategoryById = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ message: 'id is not valid' });
     };
-
-    const category = await Category.findOneAndUpdate({"_id": id}, req.body);
+    const category = await Category.findByIdAndUpdate(id, req.body, {new: true});
 
     if(!category)
         return res.status(404).json({ err: 'Category not found' });
