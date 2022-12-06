@@ -20,10 +20,7 @@
 
 <!-- Screenshots -->
 ### :camera: Screenshots
-![Images/thumbnails/1.png]()
-<div align="center"> 
-  <img src="public/Images/thumbnails/1.png" alt="screenshot" />
-</div>
+![project image](public/Images/thumbnails/1.png)
 
 
 <!-- TechStack -->
