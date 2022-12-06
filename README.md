@@ -22,7 +22,7 @@
 ### :camera: Screenshots
 ![Images/thumbnails/1.png]()
 <div align="center"> 
-  <img src="/Images/thumbnails/1.png" alt="screenshot" />
+  <img src="public/Images/thumbnails/1.png" alt="screenshot" />
 </div>
 
 
