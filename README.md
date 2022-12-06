@@ -22,7 +22,7 @@
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="./public/images/thumbnails/1.png" alt="screenshot" />
+  <img src="./public/Images/thumbnails/1.png" alt="screenshot" />
 </div>
 
 
