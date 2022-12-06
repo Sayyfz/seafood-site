@@ -20,8 +20,7 @@
 
 <!-- Screenshots -->
 ### :camera: Screenshots
-![project image](public/Images/thumbnails/1.png)
-
+<img src="public/Images/thumbnails/1.png" width="400" height="250">
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
