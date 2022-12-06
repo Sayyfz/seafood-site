@@ -20,7 +20,7 @@
 
 <!-- Screenshots -->
 ### :camera: Screenshots
-![site-image](./public/Images/thumbnails/1.png)
+![./public/Images/thumbnails/1.png]()
 <div align="center"> 
   <img src="./public/Images/thumbnails/1.png" alt="screenshot" />
 </div>
