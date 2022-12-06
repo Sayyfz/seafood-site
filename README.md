@@ -2,10 +2,10 @@
 <div align="center">
 
   <img src="assets/logo.png" alt="logo" width="200" height="auto" />
-  <h1>MyReads</h1>
+  <h1>Seafood Restaurant</h1>
   
   <p>
-    Ebook website where you search and save your favourite books into a shelf categories 
+    Seafood restaraunt site with available CRUD operations to adjust menu items 
   </p>
   
   
@@ -29,12 +29,13 @@
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
-
+<details>
+  <summary>Client</summary>
   <ul>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
     <li><a href="https://reactjs.org/">React.js</a></li>
     <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
   </ul>
+</details>
 
 <details>
   <summary>Server</summary>
