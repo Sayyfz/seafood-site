@@ -1,8 +1,7 @@
 
 <div align="center">
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
-  <h1>Seafood Restaurant</h1>
+  # Seafood Restaurant
   
   <p>
     Seafood restaraunt site with available CRUD operations to adjust menu items 
