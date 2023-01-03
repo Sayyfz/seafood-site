@@ -19,7 +19,7 @@
 
 <!-- Screenshots -->
 ### :camera: Screenshots
-<img src="./public/Images/thumbnails/1.png" width="400" height="250">
+<img src="/public/Images/thumbnails/1.png" width="400" height="250">
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
